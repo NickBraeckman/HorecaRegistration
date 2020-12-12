@@ -1,4 +1,4 @@
-# DS2-CoronaTracingRegistration
+# Horeca Registration
 
 ## Table of contents
 * [Authors](#Authors)
@@ -76,7 +76,11 @@ Implement a privacy friendly tracing registration system for catering facilities
     ```JuJ/rgnCZKxzcomzEGWbi8RnXwg=1234=+VGiIrFVlVq48ylpgP+RexvERVdjOpAIbt7umeIPMVA=```
     
     * Press on exit when you leave the bar
-    * TODO: implement a fully functional Doctor application
+    * Flush the content of the Mixing Proxy database (.csv file)
+    * Run the Doctor Application
+    * Read in the visitor log by providing the directory name of the visitor:
+    ```dir_visitor_<name>```
+    
    
 ## More Info
 * https://www.javatpoint.com/socket-programming
