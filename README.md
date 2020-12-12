@@ -39,9 +39,6 @@ Implement a privacy friendly tracing registration system for catering facilities
 ### Matching Service
 * Interface visualizes the state of the matching service (content of the database)
 
-### (Optional) Inspector
-* Can control wether QR code of pub is legitimate
-
 ## Run the registration system
 
 1) Download the jar's
