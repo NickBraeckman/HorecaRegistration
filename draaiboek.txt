@@ -1,0 +1,40 @@
+CF1
+ - 1234
+ - gent
+ - h84536sdqf436
+
+CF2
+ - 5678
+ - antwerpen
+ - h84536sdqf436
+
+
+1) Enrollment
+2) Visiting a catering facility
+ - 2 catering facilities
+ - 3 visitors
+
+ V1: CF1 niet besmet [0,2]
+ V2: CF2 niet besmet [0,3]
+ V3: CF2 wel besmet  [1,2]
+ V4: CF2 niet besmet [2,3]
+
+ scanQR: V1 -> V2 -> V3 -> V4
+
+ exit:   V1 -> V2
+	     V3 -> V4
+
+ uit:	V1, V3, V4
+
+3) Visiting the doctor
+
+ V3 besmet
+
+4) Informing visitors
+
+ V2 krijgt melding want ligt aan
+
+5) Contact uninformed visitors
+
+ V4 gaat de melding niet ack (20 sec)
+ matching stuurt naar registrar
