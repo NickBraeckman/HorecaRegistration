@@ -13,7 +13,7 @@
 * Nick Braeckman
 
 ## Assignment description
-Implement a privacy friendly tracing registration system for catering facilities
+Implement a privacy friendly tracing registration system for catering facilities [1]
 
 ## Features
 
@@ -82,3 +82,4 @@ Implement a privacy friendly tracing registration system for catering facilities
 ## More Info
 * https://www.javatpoint.com/socket-programming
 * https://docs.oracle.com/javase/tutorial/networking/index.html
+* [1] M. Willocx, D. Singelée, and V. Naessens, “Supporting Contact Tracing by Privacy-Friendly Registration at Catering Facilities,” pp. 3–8.
