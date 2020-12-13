@@ -21,6 +21,11 @@ public class CFService extends UnicastRemoteObject implements CFServiceInterface
         this.registrarService = registrarService;
     }
 
+    /**
+     * 1.1 catering facility enrolment
+     * @param pseudonyms send by Registrar
+     * @throws RemoteException
+     */
     @Override
     public void saveMonthlyPseudonyms(Map<String, String> pseudonyms) throws RemoteException {
         try {
@@ -33,6 +38,13 @@ public class CFService extends UnicastRemoteObject implements CFServiceInterface
 
     }
 
+    /**
+     * 1.1 catering facility enrolment
+     * @param businessNumber
+     * @param location
+     * @param password
+     * @return
+     */
     public boolean authenticate(long businessNumber, String location, String password) {
 
         boolean isAuthenticated = false;

@@ -22,6 +22,13 @@ public class RegistrarServiceVisitor extends UnicastRemoteObject implements Regi
         super(port);
     }
 
+    /**
+     * 1.2 user enrolment
+     * @param phoneNumber send by Visitor
+     * @param visitorService callback to Visitor
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean authenticate(String phoneNumber, VisitorServiceRegistrarInterface visitorService) throws RemoteException {
         try {
@@ -48,52 +55,8 @@ public class RegistrarServiceVisitor extends UnicastRemoteObject implements Regi
         return true;
     }
 
-
-    // TODO delete if not used
-    @Override
-    public boolean login(String phoneNumber, String passwd, VisitorServiceRegistrarInterface visitorService) {
-
-        if (VisitorRepository.getInstance().isVisitorAuthenticated(phoneNumber, passwd)) {
-            try {
-                TokenBatch tokenBatch = TokenGenerator.generateDailyTokens(phoneNumber);
-
-                if (tokenBatch != null) {
-                    visitorService.saveDailyTokens(tokenBatch);
-                }
-
-            } catch (SignatureException | NoSuchAlgorithmException | InvalidKeyException | IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    // TODO delete if not used
-    @Override
-    public boolean signup(String phoneNumber, String passwd, VisitorServiceRegistrarInterface visitorService) {
-
-        if (VisitorRepository.getInstance().addVisitor(phoneNumber, passwd)) {
-            try {
-                TokenBatch tokenBatch = TokenGenerator.generateInitTokens(phoneNumber);
-                if (tokenBatch != null) {
-                    visitorService.saveDailyTokens(tokenBatch);
-                }
-            } catch (SignatureException | NoSuchAlgorithmException | InvalidKeyException | IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     public TokenBatch receiveDailyTokens(String phoneNumber) throws RemoteException {
-        //TODO
         return null;
     }
 

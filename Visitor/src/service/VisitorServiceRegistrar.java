@@ -17,6 +17,12 @@ public class VisitorServiceRegistrar extends UnicastRemoteObject implements Visi
         this.tokenRepository = tokenRepository;
     }
 
+    /**
+     * 1.3 retrieve tokens
+     * receive the daily tokens from the registrar in a batch
+     * @param tokenBatch send by registrar
+     * @throws RemoteException
+     */
     @Override
     public void saveDailyTokens(TokenBatch tokenBatch) throws RemoteException {
         try {
@@ -27,6 +33,11 @@ public class VisitorServiceRegistrar extends UnicastRemoteObject implements Visi
         }
     }
 
+    /**
+     * 1.2 user enrollment
+     * @param phoneNumber
+     * @return
+     */
     public boolean authenticate(String phoneNumber){
         isAuthenticated = false;
         try {

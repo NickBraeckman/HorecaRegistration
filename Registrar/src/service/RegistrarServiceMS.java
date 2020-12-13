@@ -24,9 +24,10 @@ public class RegistrarServiceMS extends UnicastRemoteObject implements Registrar
     }
 
     /**
-     * 3.2 submit logs -> control location data of infected user by taking the hash on the daily pseudonyms
-     * and comparing it with the log
-     * @param date
+     *
+     * control location data of infected user by taking the hash on the daily pseudonyms
+     * compare it with the hashes in the local storage of the Matching Service
+     * @param date send by Matching Service
      * @return
      * @throws RemoteException
      */
@@ -44,8 +45,8 @@ public class RegistrarServiceMS extends UnicastRemoteObject implements Registrar
     }
 
     /**
-     * 4.4 Forward unacked logs
-     * @param tokenSigns
+     * 4.4 forward unacked logs
+     * @param tokenSigns send by Matching Service
      * @throws RemoteException
      */
     @Override

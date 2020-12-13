@@ -16,6 +16,12 @@ public class MatchingServiceVisitor extends UnicastRemoteObject implements Match
         super(port);
     }
 
+    /**
+     * 4.1 request infected capsules
+     * visitor request all the tuples that are marked critical
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public List<CriticalTuple> requestCriticalTuples() throws RemoteException {
         List<CriticalTuple> criticalTuples = new ArrayList<>();

@@ -22,6 +22,15 @@ public class RegistrarServiceCF extends UnicastRemoteObject implements Registrar
         super(port);
     }
 
+    /**
+     * 1.1 catering facility enrolment
+     * @param businessNumber send by Catering Facility
+     * @param location send by Catering Facility
+     * @param password send by Catering Facility
+     * @param cfService callback to Catering Facility
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean authenticateCateringFacility(long businessNumber, String location, String password, CFServiceInterface cfService) throws RemoteException {
 
@@ -53,6 +62,13 @@ public class RegistrarServiceCF extends UnicastRemoteObject implements Registrar
         return false;
     }
 
+    /**
+     * 1.1 catering facility enrolment
+     * @param businessNumber send by Catering Facility
+     * @param location send by Catering Facility
+     * @param password send by Catering Facility
+     * @param cfService callback to Catering Facility
+     */
     private void registerCateringFacility(long businessNumber, String location, String password, CFServiceInterface cfService) {
 
         CateringFacility cateringFacility = new CateringFacility(businessNumber, location, password, cfService);

@@ -24,12 +24,9 @@ public class MPServiceVisitor extends UnicastRemoteObject implements MPServiceVi
 
     }
 
-
-
-
-
     /**
-     * after scanning of qr code
+     * 2.1 register visit
+     * happens after scanning of qr code
      * sign H(Ri, nym) or hash
      * store capsule with a time interval
      * send signed H(Ri, nym) back
@@ -76,6 +73,7 @@ public class MPServiceVisitor extends UnicastRemoteObject implements MPServiceVi
     }
 
     /**
+     * 2.1 register visit
      * update the capsule exit time when visitor leaves the catering facility -> exit
      * @param capsule
      * @param vsService
@@ -117,8 +115,13 @@ public class MPServiceVisitor extends UnicastRemoteObject implements MPServiceVi
         return true;
     }
 
-    // user sends tuples that appear in local storage
-    // mixing proxy forwards these to matching service
+    /**
+     * user sends tuples that appear in his/her local storage
+     * mixing proxy forwards these to the matching service
+     * @param uninformedTokenSigns
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean sendUninformedTokenSigns(List<String> uninformedTokenSigns) throws RemoteException {
 

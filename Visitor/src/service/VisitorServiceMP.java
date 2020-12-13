@@ -22,6 +22,12 @@ public class VisitorServiceMP extends UnicastRemoteObject implements VisitorServ
         this.mixingProxyService = mixingProxyService;
     }
 
+    /**
+     * receive an acknowledgment from the mixing proxy
+     * the validity of the QR-code is approved
+     * generate a cf and day specific visual representation
+     * @param acknowledgement send by Mixing Proxy
+     */
     @Override
     public void receiveAcknowledgment(Acknowledgement acknowledgement) {
         ACK = acknowledgement.sign.getBytes();
@@ -80,7 +86,15 @@ public class VisitorServiceMP extends UnicastRemoteObject implements VisitorServ
         return (alpha << 24) | (red << 16) | (green << 8) | blue;
     }
 
-
+    /**
+     * 2.1 register a visit
+     * send a capsule to the Mixing Proxy after scanning the QR-code
+     * @param arriveTime
+     * @param stopTime
+     * @param hash
+     * @param token
+     * @return
+     */
     public boolean sendCapsule(LocalDateTime arriveTime, LocalDateTime stopTime, String hash, Token token) {
 
         Capsule capsule = initCapsule(arriveTime, stopTime, hash, token);
@@ -99,8 +113,16 @@ public class VisitorServiceMP extends UnicastRemoteObject implements VisitorServ
         return true;
     }
 
+    /**
+     * 2.1 register a visit
+     * update the exit time of the last sent capsule
+     * @param arriveTime
+     * @param stopTime
+     * @param hash
+     * @param token
+     * @return
+     */
     public boolean updateCapsule(LocalDateTime arriveTime, LocalDateTime stopTime, String hash, Token token) {
-
 
         Capsule capsule = initCapsule(arriveTime, stopTime, hash, token);
 

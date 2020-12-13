@@ -26,6 +26,19 @@ public class MatchingService extends UnicastRemoteObject implements MatchingServ
         this.registrarServiceMSInterface = serviceMSInterface;
     }
 
+    /**
+     * 3.2 submit logs
+     * the doctor sends the capsules of an infected user
+     * the matching service checks the validity of the capsules
+     * ask the pseudonyms of the days that the capsules are created for
+     * compare the hashes: H(Ri, nym) = H'(Ri,nym)
+     * check the validity of the doctor sign
+     * mark the capsules in local storage critical
+     *
+     * @param infectedCapsules : send and signed by Doctor
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public boolean sendInfectedCapsule(List<InfectedCapsule> infectedCapsules) throws RemoteException {
 
@@ -37,13 +50,14 @@ public class MatchingService extends UnicastRemoteObject implements MatchingServ
             dates.add(capsule.getExitTime().toLocalDate());
         }
 
+        // request pseudonyms
         for (LocalDate date : dates) {
             pseudonyms = registrarServiceMSInterface.requestPseudonyms(date);
         }
 
         try {
-
             for (InfectedCapsule infectedCapsule : infectedCapsules) {
+                // check the validity of the capsule's hash and the doctor sign
                 if (MSSecurityManager.getInstance().verifySignInfectedCapsule(infectedCapsule, pseudonyms)) {
                     CapsuleRepository.getInstance().markCapsulesCritical(infectedCapsule.getTokenSign(), infectedCapsule.getHash(), infectedCapsule.getArriveTime(), infectedCapsule.getExitTime());
                 }
