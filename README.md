@@ -13,7 +13,7 @@
 * Nick Braeckman
 
 ## Assignment description
-Implement a privacy friendly tracing registration system for catering facilities
+Implement a privacy friendly tracing registration system for catering facilities [1]
 
 ## Features
 
