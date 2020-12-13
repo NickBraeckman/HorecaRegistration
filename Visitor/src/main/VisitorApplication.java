@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.org.apache.xpath.internal.axes.OneStepIterator;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -160,10 +161,18 @@ public class VisitorApplication extends Application {
     }
 
     private void newStage2(Image image) {
+
+        controller.timeInterval().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                stage2.setTitle("Visitor: " +phoneNumber + " " + newValue);
+            }
+        });
+
         ImageView proofImageView = new ImageView();
         proofImageView.setImage(image);
         stage2 = new Stage();
-        stage2.setTitle("Visitor: " +phoneNumber);
+        stage2.setTitle("Visitor: " +phoneNumber + " " +controller.timeInterval().get());
         AnchorPane ap = new AnchorPane();
         ap.getChildren().add(proofImageView);
         stage2.setScene(new Scene(ap));

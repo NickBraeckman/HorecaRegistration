@@ -5,8 +5,11 @@ import data.CSVDataManager;
 import data.QRCode;
 import data.TokenRepository;
 import data.VisitorLogRepository;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -16,6 +19,7 @@ import service.*;
 import util.Config;
 import util.Constants;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -27,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +54,7 @@ public class VisitorController {
     private boolean stopLogging = false;
     private Token token;
     private BooleanProperty stopLoggingProperty = new SimpleBooleanProperty();
+    private StringProperty timeInterval = new SimpleStringProperty();
 
     public VisitorController() {
         dataManager = new CSVDataManager();
@@ -64,6 +70,8 @@ public class VisitorController {
     public final void setStopLoggingProperty(boolean stopLoggingProperty) {
         this.stopLoggingProperty.set(stopLoggingProperty);
     }
+
+    public StringProperty timeInterval() {return  timeInterval;}
 
     public BooleanProperty stopLogging() {
         return stopLoggingProperty;
@@ -121,6 +129,7 @@ public class VisitorController {
                         stopLogging = true;
                     } else {
 
+                        Platform.runLater(() -> timeInterval.set(temp.toString() + " - " + temp.plusSeconds(Constants.CAPSULE_VISITOR_FLUSH_DELAY).toString()));
                         // add the qr-code entries, time interval and token to the visitor log
                         visitorLogRepository.logQrCode(temp, qrCode, token.getSign());
                     }
@@ -207,6 +216,8 @@ public class VisitorController {
         if (isValid) {
             stopLoggingProperty.set(false);
             stopLogging = false;
+            // update the time interval GUI
+            timeInterval.set(arriveTime.toString() + " - " + arriveTime.plusSeconds(Constants.CAPSULE_VISITOR_FLUSH_DELAY).toString());
             try {
                 startTokenTimer(hash);
             } catch (IOException e) {
