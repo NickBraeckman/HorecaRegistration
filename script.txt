@@ -22,7 +22,7 @@ CF2
  scanQR: V1 -> V2 -> V3 -> V4
 
  exit:   V1 -> V2
-	     V3 -> V4
+	 V3 -> V4
 
  uit:	V1, V3, V4
 
