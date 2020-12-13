@@ -30,6 +30,7 @@ public class MSSecurityManager {
 
     public boolean verifySignInfectedCapsule(InfectedCapsule infectedCapsule, List<String> pseudonyms) throws InvalidKeySpecException, NoSuchAlgorithmException, IOException, SignatureException, InvalidKeyException {
 
+        // The signature algorithm with SHA-* and the RSA encryption algorithm as defined in the OSI Interoperability Workshop, using the padding conventions described in PKCS #1.
         Signature signEngine = Signature.getInstance("SHA256withRSA");
         PublicKey key = PublicKeyRepository.getInstance().getRegistrarPublicKey(CSVDataManager.CSVFile.PUBLIC_KEYS_DOCTOR);
 

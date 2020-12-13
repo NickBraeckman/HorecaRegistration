@@ -37,7 +37,7 @@ public class MPSecurityManager {
         KeyPairGenerator keyGen = null;
         try {
             keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048);
+            keyGen.initialize(2048,new SecureRandom());
             KeyPair rsaPair = keyGen.generateKeyPair();
             publicKey = rsaPair.getPublic();
             CSVDataManager.getInstance().writePublicKeyToCsv(CSVDataManager.CSVFile.PUBLIC_KEYS_MP,publicKey);
@@ -51,6 +51,7 @@ public class MPSecurityManager {
 
         boolean isValid = false;
 
+        // The signature algorithm with SHA-* and the RSA encryption algorithm as defined in the OSI Interoperability Workshop, using the padding conventions described in PKCS #1
         Signature signEngine = Signature.getInstance("SHA256withRSA");
         PublicKey key = PublicKeyRepository.getInstance().getRegistrarPublicKey(CSVDataManager.CSVFile.PUBLIC_KEYS_REGISTRAR);
 
@@ -79,6 +80,7 @@ public class MPSecurityManager {
 
         byte[] output = capsule.getHash().getBytes();
 
+        // The signature algorithm with SHA-* and the RSA encryption algorithm as defined in the OSI Interoperability Workshop, using the padding conventions described in PKCS #1.
         Signature signEngine = Signature.getInstance("SHA256withRSA");
         signEngine.initSign(privateKey);
 

@@ -37,7 +37,7 @@ public class RegistrarSecurityManager {
         KeyPairGenerator keyGen = null;
         try {
             keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048);
+            keyGen.initialize(2048,new SecureRandom());
             KeyPair rsaPair = keyGen.generateKeyPair();
             publicKey = rsaPair.getPublic();
             CSVDataManager.getInstance().writePublicKeyToCsv(CSVDataManager.CSVFile.PUBLIC_KEYS_REGISTRAR,publicKey);

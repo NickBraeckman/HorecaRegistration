@@ -35,7 +35,7 @@ public class DoctorSecurityManager {
         KeyPairGenerator keyGen = null;
         try {
             keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048);
+            keyGen.initialize(2048, new SecureRandom());
             KeyPair dsaPair = keyGen.generateKeyPair();
             publicKey = dsaPair.getPublic();
             CSVDataManager.getInstance().writePublicKeyToCsv(CSVDataManager.CSVFile.PUBLIC_KEYS_DOCTOR,publicKey);
@@ -48,6 +48,7 @@ public class DoctorSecurityManager {
     public List<InfectedCapsule> signInfectedCapsules(List<InfectedCapsule> infectedCapsules) throws InvalidKeyException, NoSuchAlgorithmException, IOException, SignatureException {
 
         // create and initialize signature object
+        // The signature algorithm with SHA-* and the RSA encryption algorithm as defined in the OSI Interoperability Workshop, using the padding conventions described in PKCS #1.
         Signature signEngine = Signature.getInstance("SHA256withRSA");
         signEngine.initSign(privateKey);
 
