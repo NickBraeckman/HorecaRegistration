@@ -1,18 +1,21 @@
-CF1
- - 1234
- - gent
- - h84536sdqf436
-
-CF2
- - 5678
- - antwerpen
- - h84536sdqf436
-
-
 1) Enrollment
+
+ CF1
+  - 1234
+  - gent
+  - h84536sdqf436
+
+ CF2
+  - 5678
+  - antwerpen
+  - h84536sdqf436
+
+ V1 phone number: 1
+ V2 phone number: 2
+ V3 phone number: 3
+ V4 phone number: 4
+
 2) Visiting a catering facility
- - 2 catering facilities
- - 3 visitors
 
  V1: CF1 niet besmet [0,2]
  V2: CF2 niet besmet [0,3]
@@ -22,7 +25,7 @@ CF2
  scanQR: V1 -> V2 -> V3 -> V4
 
  exit:   V1 -> V2
-	 V3 -> V4
+	     V3 -> V4
 
  uit:	V1, V3, V4
 
